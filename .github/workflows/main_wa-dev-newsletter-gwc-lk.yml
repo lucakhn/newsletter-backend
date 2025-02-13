@@ -15,12 +15,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Use Bun
+     - name: Set up bun
         uses: oven-sh/setup-bun@v2
-      - name: bun install, and start
+        with:
+          bun-version: latest
+ 
+      - name: bun install, build, and test
         run: |
           bun install
-          bun run build
+          bun run build --if-present
 
       - name: Zip artifact for deployment
         run: zip release.zip ./app
